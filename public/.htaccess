@@ -1,0 +1,11 @@
+# Blue Oak — SPA routing fallback for Apache (GoDaddy shared hosting)
+# Ensures direct navigation to /services, /pricing/jamaica, /revenue-snapshot etc.
+# serves index.html so the React router can handle the route.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
