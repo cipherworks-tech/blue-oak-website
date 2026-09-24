@@ -6,8 +6,6 @@ import NotFound from "@/pages/not-found";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ExitIntentPopup from "@/components/ExitIntentPopup";
-import MarketDetectionBanner from "@/components/MarketDetectionBanner";
 
 // Core pages
 import Home from "@/pages/Home";
@@ -43,7 +41,6 @@ function Router() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <MarketDetectionBanner />
       <main className="flex-grow">
         <Switch>
           <Route path="/" component={Home} />
@@ -83,7 +80,6 @@ function Router() {
         </Switch>
       </main>
       <Footer />
-      <ExitIntentPopup />
     </div>
   );
 }

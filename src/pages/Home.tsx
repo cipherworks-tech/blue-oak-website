@@ -121,17 +121,6 @@ export default function Home() {
   return (
     <div className="bg-background min-h-screen text-foreground overflow-x-hidden">
 
-      {/* Floating CTA mobile */}
-      <motion.div
-        className="fixed bottom-6 right-6 z-40 md:hidden"
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={floatingCta ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
-        transition={{ duration: 0.25 }}
-      >
-        <Button asChild size="sm" className="shadow-[0_0_20px_rgba(212,175,55,0.4)]">
-          <Link href={BRAND.snapshotPath}>Revenue Snapshot™ <ArrowRight className="ml-1 w-3.5 h-3.5" /></Link>
-        </Button>
-      </motion.div>
 
       {/* ── HERO ── */}
       <section className="relative pt-36 pb-28 md:pt-52 md:pb-40 px-4 overflow-hidden">
@@ -171,14 +160,14 @@ export default function Home() {
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" asChild
-              className="w-full sm:w-auto text-base font-semibold px-8 shadow-[0_0_24px_rgba(212,175,55,0.35)] hover:shadow-[0_0_36px_rgba(212,175,55,0.55)] transition-shadow">
+              className="w-full sm:w-auto text-base font-semibold px-6 sm:px-8 whitespace-normal text-center leading-tight min-h-14 shadow-[0_0_24px_rgba(212,175,55,0.35)] hover:shadow-[0_0_36px_rgba(212,175,55,0.55)] transition-shadow">
               <Link href={BRAND.snapshotPath}>
                 Request Your Complimentary Revenue Snapshot™
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild
-              className="w-full sm:w-auto text-base font-semibold px-8 bg-transparent border-white/15 hover:bg-white/5 hover:border-primary/40">
+              className="w-full sm:w-auto text-base font-semibold px-6 sm:px-8 whitespace-normal text-center leading-tight min-h-14 bg-transparent border-white/15 hover:bg-white/5 hover:border-primary/40">
               <a href="#what-is-revenue-infrastructure">
                 Explore Revenue Infrastructure™ <ChevronRight className="ml-1 w-4 h-4" />
               </a>
