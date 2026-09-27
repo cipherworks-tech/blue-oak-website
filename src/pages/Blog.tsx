@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,9 +14,12 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 const categories = ["All", "Revenue Recovery", "Revenue Infrastructure", "AI Automation", "Lead Conversion", "Operational Intelligence"];
 
 export default function Blog() {
+  const [activeCategory, setActiveCategory] = useState('All');
   const posts = getAllBlogPosts();
   const featured = posts.find(p => p.featured);
-  const regular = posts.filter(p => !p.featured);
+  const regular = posts.filter(
+    p => !p.featured && (activeCategory === 'All' || p.category === activeCategory)
+  );
 
   return (
     <div className="pt-24 min-h-screen text-foreground">
