@@ -357,7 +357,7 @@ export default function RevenueSnapshot() {
                 </div>
               </a>
               <a
-                href={BRAND.usPhone ? `tel:+12489880542` : "#"}
+                href={BRAND.usPhoneHref ?? "#"}
                 className="flex items-center gap-3 rounded-xl border border-border/40 bg-white/[0.02] p-4 hover:border-primary/30 transition-colors"
               >
                 <Phone className="w-4 h-4 text-primary" />
