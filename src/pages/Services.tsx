@@ -23,6 +23,8 @@ const GROUPS = [
       "Revenue depends on being found. Blue Oak assesses how effectively a business creates visibility, attracts attention, and generates the conditions for inbound opportunity.",
     capabilities: [
       "Search visibility and local presence",
+      "Social media content and engagement systems",
+      "Social inquiry capture and lead routing",
       "Google Business Profile optimization",
       "Online reputation and review management",
       "Inquiry pathway clarity",
@@ -47,6 +49,7 @@ const GROUPS = [
       "Appointment scheduling and confirmation",
       "Sales follow-up sequences",
       "Conversion infrastructure",
+      "Social inquiry response and follow-up",
     ],
   },
   {
