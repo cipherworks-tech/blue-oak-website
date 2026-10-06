@@ -73,7 +73,7 @@ export default function Pricing() {
                 `Prices in Jamaican dollars (JMD)`,
                 `WhatsApp Business integration`,
                 `Service businesses, contractors, local operators`,
-                `Starter plans from ${JM.pricing.starter}${JM.billingPeriod}`,
+                `Foundation plans from ${JM.pricing.foundation[0]}${JM.billingPeriod}`,
                 `Built for Jamaica's business context`,
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-2.5 text-sm text-muted-foreground">
@@ -114,7 +114,7 @@ export default function Pricing() {
                 `Prices in USD`,
                 `Home services, contractors, law firms, real estate, professional services`,
                 `CRM and workflow integration`,
-                `Starter plans from ${US.pricing.starter}${US.billingPeriod}`,
+                `Foundation plans from ${US.pricing.foundation[0]}${US.billingPeriod}`,
                 `Detroit Metro and nationwide`,
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-2.5 text-sm text-muted-foreground">

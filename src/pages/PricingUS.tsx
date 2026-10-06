@@ -10,7 +10,7 @@ const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 const PACKAGES = [
   {
     name: "Community Impact",
-    price: US.pricing.communityImpact,
+    prices: ["$497"],
     note: "Approval required · Solo operators & community organisations",
     featured: false,
     restricted: true,
@@ -24,56 +24,52 @@ const PACKAGES = [
     cta: "Apply",
   },
   {
-    name: "Starter",
-    price: US.pricing.starter,
-    note: "Core revenue infrastructure",
+    name: "Foundation",
+    prices: ["$497", "$897", "$1,497"],
+    note: "Build the infrastructure that makes revenue capture and conversion dependable.",
     featured: false,
     restricted: false,
     features: [
-      "Missed call text-back automation",
-      "SMS + Email intake flow",
-      "Appointment booking & confirmation",
-      "Lead capture to CRM",
-      "Appointment reminder sequence",
-      "Pipeline reporting dashboard",
-      "Email support",
+      "Visibility and inquiry pathways",
+      "Lead capture and response",
+      "Appointment booking and confirmation",
+      "Lead routing and qualification",
+      "Pipeline visibility",
+      "Follow-up infrastructure",
     ],
     cta: "Get Started",
   },
   {
-    name: "Growth",
-    price: US.pricing.growth,
-    note: "For businesses scaling infrastructure",
+    name: "Revenue Recovery",
+    prices: ["$1,197", "$2,497", "$3,997"],
+    note: "Recover revenue already being lost through missed calls, weak follow-up, no-shows, and inactive customers.",
     featured: true,
     restricted: false,
     features: [
-      "Everything in Starter",
-      "Multi-channel follow-up (3-touch)",
-      "Lead qualification & routing",
-      "CRM integration",
-      "Bi-weekly performance reviews",
-      "Priority support",
-      "1 custom automation",
-      "Lapsed customer reactivation",
+      "Everything in Foundation",
+      "Missed-call revenue recovery",
+      "Multi-channel follow-up",
+      "Lead qualification and routing",
+      "No-show and cancellation recovery",
+      "Customer reactivation",
+      "Win-back campaign automation",
     ],
     cta: "Get Started",
   },
   {
-    name: "Premium",
-    price: US.pricing.premium,
-    note: "Full revenue infrastructure deployment",
+    name: "Revenue Engine",
+    prices: ["$1,797", "$3,497", "$5,497"],
+    note: "Full revenue infrastructure for businesses ready to build, measure, and continuously optimize the entire revenue cycle.",
     featured: false,
     restricted: false,
     features: [
-      "Everything in Growth",
+      "Everything in Revenue Recovery",
       "Full intake-to-conversion flow",
-      "No-show & cancellation recovery",
-      "Customer reactivation (90-day)",
-      "Real-time pipeline dashboard",
-      "Monthly strategy session",
-      "Up to 3 custom automations",
-      "Win-back campaign automation",
-      "Revenue reporting suite",
+      "Real-time pipeline visibility",
+      "Advanced follow-up and reactivation",
+      "Revenue reporting and intelligence",
+      "Custom automation capacity",
+      "Continuous optimization",
     ],
     cta: "Get Started",
   },
@@ -153,7 +149,18 @@ export default function PricingUS() {
               )}
               <div className="p-6 flex flex-col flex-1">
                 <p className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">{pkg.name}</p>
-                <p className="text-3xl font-extrabold mb-1">{pkg.price}</p>
+                <div className="space-y-1.5 mb-1">
+                  {pkg.prices.map((price, j) => (
+                    <div key={j} className="flex items-baseline gap-2">
+                      <span className="text-2xl font-extrabold">{price}</span>
+                      {pkg.prices.length > 1 && (
+                        <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                          {j === 0 ? "Starter" : j === 1 ? "Growth" : "Premium"}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
                 <p className="text-xs text-muted-foreground mb-1">{US.billingPeriod}</p>
                 <p className="text-xs text-muted-foreground/60 mb-5 italic">{pkg.note}</p>
                 <ul className="space-y-2.5 mb-6 flex-1">

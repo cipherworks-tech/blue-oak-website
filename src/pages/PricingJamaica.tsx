@@ -10,7 +10,7 @@ const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 const PACKAGES = [
   {
     name: "Community Impact",
-    price: JM.pricing.communityImpact,
+    prices: ["J$45,000"],
     note: "Small businesses & community organisations",
     featured: false,
     restricted: true,
@@ -24,56 +24,52 @@ const PACKAGES = [
     cta: "Get Started",
   },
   {
-    name: "Starter",
-    price: JM.pricing.starter,
-    note: "Core revenue infrastructure",
+    name: "Foundation",
+    prices: ["J$65,000", "J$110,000", "J$180,000"],
+    note: "Build the infrastructure that makes revenue capture and conversion dependable.",
     featured: false,
     restricted: false,
     features: [
-      "Missed call text-back automation",
-      "WhatsApp + SMS intake flow",
-      "Appointment booking & confirmation",
-      "Lead capture to CRM",
-      "Appointment reminder sequence",
-      "Pipeline reporting dashboard",
-      "Email support",
+      "Visibility and inquiry pathways",
+      "Lead capture and response",
+      "Appointment booking and confirmation",
+      "Lead routing and qualification",
+      "Pipeline visibility",
+      "Follow-up infrastructure",
     ],
     cta: "Get Started",
   },
   {
-    name: "Growth",
-    price: JM.pricing.growth,
-    note: "For businesses scaling infrastructure",
+    name: "Revenue Recovery",
+    prices: ["J$95,000", "J$190,000", "J$315,000"],
+    note: "Recover revenue already being lost through missed calls, weak follow-up, no-shows, and inactive customers.",
     featured: true,
     restricted: false,
     features: [
-      "Everything in Starter",
-      "Multi-channel follow-up (3-touch)",
-      "Lead qualification & routing",
-      "CRM integration",
-      "Bi-weekly performance reviews",
-      "Priority support",
-      "1 custom automation",
-      "Lapsed customer reactivation",
+      "Everything in Foundation",
+      "Missed-call revenue recovery",
+      "Multi-channel follow-up",
+      "Lead qualification and routing",
+      "No-show and cancellation recovery",
+      "Customer reactivation",
+      "Win-back campaign automation",
     ],
     cta: "Get Started",
   },
   {
-    name: "Premium",
-    price: JM.pricing.premium,
-    note: "Full revenue infrastructure deployment",
+    name: "Revenue Engine",
+    prices: ["J$175,000", "J$315,000", "J$495,000"],
+    note: "Full revenue infrastructure for businesses ready to build, measure, and continuously optimize the entire revenue cycle.",
     featured: false,
     restricted: false,
     features: [
-      "Everything in Growth",
+      "Everything in Revenue Recovery",
       "Full intake-to-conversion flow",
-      "No-show & cancellation recovery",
-      "Customer reactivation (90-day)",
-      "Real-time pipeline dashboard",
-      "Monthly strategy session",
-      "Up to 3 custom automations",
-      "Win-back campaign automation",
-      "Revenue reporting suite",
+      "Real-time pipeline visibility",
+      "Advanced follow-up and reactivation",
+      "Revenue reporting and intelligence",
+      "Custom automation capacity",
+      "Continuous optimization",
     ],
     cta: "Get Started",
   },
@@ -84,7 +80,7 @@ const FAQS = [
   { q: "Does implementation begin without a diagnosis?", a: "No. Blue Oak recommends a Revenue Snapshot™ or Revenue Infrastructure Assessment™ before implementation. The right package is determined by what your business actually needs." },
   { q: "What is WhatsApp-first delivery?", a: "WhatsApp is the primary business communication channel in Jamaica. Our systems use WhatsApp Business as the default channel for follow-ups, intake flows, reminders, and reactivation campaigns." },
   { q: "Are there any additional costs?", a: "Any applicable third-party tool costs and any onboarding arrangements are set out during the Revenue Infrastructure Assessment™ and confirmed in your service agreement before work begins." },
-  { q: "Can I start on a lower tier and move up later?", a: "Yes — plans are designed to build on each other. Many businesses start with Starter to establish core infrastructure and expand from there. Timing and terms for moving between tiers are confirmed in your service agreement." },
+  { q: "Can I start on a lower tier and move up later?", a: "Yes — plans are designed to build on each other. Many businesses start with Foundation to establish core infrastructure and expand from there. Timing and terms for moving between tiers are confirmed in your service agreement." },
 ];
 
 export default function PricingJamaica() {
@@ -152,7 +148,18 @@ export default function PricingJamaica() {
               )}
               <div className="p-6 flex flex-col flex-1">
                 <p className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">{pkg.name}</p>
-                <p className="text-2xl font-extrabold mb-1">{pkg.price}</p>
+                <div className="space-y-1.5 mb-1">
+                  {pkg.prices.map((price, j) => (
+                    <div key={j} className="flex items-baseline gap-2">
+                      <span className="text-2xl font-extrabold">{price}</span>
+                      {pkg.prices.length > 1 && (
+                        <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                          {j === 0 ? "Starter" : j === 1 ? "Growth" : "Premium"}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
                 <p className="text-xs text-muted-foreground mb-1">{JM.billingPeriod}</p>
                 <p className="text-xs text-muted-foreground/60 mb-5 italic">{pkg.note}</p>
                 <ul className="space-y-2.5 mb-6 flex-1">

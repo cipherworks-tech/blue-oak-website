@@ -34,9 +34,9 @@ export interface MarketConfig {
   pricingPath: string;
   pricing: {
     communityImpact: string;
-    starter: string;
-    growth: string;
-    premium: string;
+    foundation: [string, string, string];
+    recovery: [string, string, string];
+    engine: [string, string, string];
     assessment: string;         // "Provided during consultation" until formally priced
   };
 }
@@ -65,9 +65,9 @@ export const MARKETS: Record<MarketKey, MarketConfig> = {
     billingPeriod: "/month",
     pricing: {
       communityImpact: "$497",
-      starter: "$1,197",
-      growth: "$2,397",
-      premium: "$3,997",
+      foundation: ["$497", "$897", "$1,497"],
+      recovery: ["$1,197", "$2,497", "$3,997"],
+      engine: ["$1,797", "$3,497", "$5,497"],
       assessment: "Provided during consultation",
     },
   },
@@ -102,9 +102,9 @@ export const MARKETS: Record<MarketKey, MarketConfig> = {
     billingPeriod: "/month",
     pricing: {
       communityImpact: "J$45,000",
-      starter: "J$95,000",
-      growth: "J$190,000",
-      premium: "J$315,000",
+      foundation: ["J$65,000", "J$110,000", "J$180,000"],
+      recovery: ["J$95,000", "J$190,000", "J$315,000"],
+      engine: ["J$175,000", "J$315,000", "J$495,000"],
       assessment: "Provided during consultation",
     },
   },
