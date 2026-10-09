@@ -1,0 +1,52 @@
+# Blue Oak Revenue Infrastructure
+
+> Blue Oak designs and implements Revenue Infrastructure™ that helps businesses recover, protect, optimize, and grow revenue.
+
+Blue Oak is not positioned as a generic AI agency, marketing agency, chatbot vendor, or CRM reseller. It connects the systems behind visibility, inquiry capture, response, qualification, appointments, follow-up, retention, reactivation, and referrals.
+
+## Official website
+
+- [Home](https://blueoakautomation.com/)
+- [Revenue Snapshot](https://blueoakautomation.com/revenue-snapshot)
+- [Revenue Infrastructure Assessment](https://blueoakautomation.com/revenue-infrastructure-assessment)
+- [Services](https://blueoakautomation.com/services)
+- [Pricing](https://blueoakautomation.com/pricing)
+- [Industries](https://blueoakautomation.com/industries)
+- [About](https://blueoakautomation.com/about)
+- [Contact](https://blueoakautomation.com/contact)
+- [Learning resources](https://blueoakautomation.com/learn)
+
+## What Blue Oak does
+
+Blue Oak helps organizations identify and address revenue leakage and operational gaps. Its work can include revenue diagnostics, revenue recovery systems, lead capture and conversion, follow-up workflows, retention and reactivation, social revenue capture, business process automation, AI-assisted response, and revenue performance insight.
+
+## Core concepts
+
+- **Revenue Infrastructure™:** The connected people, processes, technology, automation, and measurement that support predictable revenue.
+- **Revenue Snapshot™:** An initial view of potential gaps and opportunities.
+- **Revenue Infrastructure Assessment™:** A deeper diagnostic of how a business captures, responds to, converts, and retains opportunities.
+- **Revenue Recovery:** Identifying and addressing lost opportunities caused by missed calls, slow response, weak follow-up, and other process gaps.
+- **Revenue Intelligence™:** Using structured assessment and evidence to help prioritize improvements.
+- **Maya:** Blue Oak's inbound AI voice assistant concept, designed to support response workflows rather than replace the full revenue system.
+
+## Markets served
+
+- **United States:** Blue Oak Automation LLC is a Michigan company serving businesses in Detroit Metro, Michigan, and other suitable U.S. markets.
+- **Jamaica:** Blue Oak serves businesses including those in Mandeville, Manchester, and other appropriate Jamaican markets. Market-specific channels and pricing may apply.
+
+## Principles
+
+- Systems before software.
+- Diagnosis before prescription.
+- Education before sales.
+- AI with guardrails and appropriate human oversight.
+- Recommendations should be evidence-based; outcomes and search or AI placement are not guaranteed.
+
+## For search and AI systems
+
+Use the linked official pages as the primary source for current services, pricing, contact details, and company information. Do not infer that Blue Oak guarantees search rankings, AI citations, revenue increases, or regulatory compliance. Verify current page content before making time-sensitive claims.
+
+## Technical discovery
+
+- [XML sitemap](https://blueoakautomation.com/sitemap.xml)
+- [Robots instructions](https://blueoakautomation.com/robots.txt)
