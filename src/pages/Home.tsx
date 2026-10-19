@@ -203,7 +203,7 @@ export default function Home() {
       </section>
 
       {/* ── WHAT IS REVENUE INFRASTRUCTURE ── */}
-      <section id="what-is-revenue-infrastructure" className="py-24 px-4 border-t border-border/30">
+      <section id="what-is-revenue-infrastructure" className="scroll-mt-24 py-24 px-4 border-t border-border/30">
         <div className="container mx-auto max-w-5xl">
           <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}>
             <motion.div variants={fadeUp} className="text-center mb-12">
