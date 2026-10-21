@@ -13,7 +13,10 @@ const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
 };
-const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
+
+const stagger = {
+  visible: { transition: { staggerChildren: 0.1 } },
+};
 
 // Read booking URL from environment — set VITE_BOOKING_URL in .env
 const BOOKING_URL = import.meta.env.VITE_BOOKING_URL as string | undefined;
@@ -28,13 +31,21 @@ function MessageForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     if (submitting) return;
+
     setSubmitError(null);
     setSubmitting(true);
 
     const form = e.currentTarget;
+
     const get = (name: string) =>
-      (form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement)?.value ?? "";
+      (
+        form.elements.namedItem(name) as
+          | HTMLInputElement
+          | HTMLSelectElement
+          | HTMLTextAreaElement
+      )?.value ?? "";
 
     const name = get("name").trim();
     const businessEmail = get("businessEmail").trim();
@@ -59,6 +70,7 @@ function MessageForm() {
     };
 
     const result = await submitLead("contact-message", payload);
+
     if (result.ok) {
       setSubmitted(true);
     } else {
@@ -79,10 +91,16 @@ function MessageForm() {
         <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center shadow-[0_0_32px_rgba(212,175,55,0.2)]">
           <CheckCircle className="w-8 h-8 text-primary" />
         </div>
+
         <div>
-          <h3 className="text-xl font-extrabold mb-2">Message Received</h3>
+          <h3 className="text-xl font-extrabold mb-2">
+            Message Received
+          </h3>
+
           <p className="text-muted-foreground text-sm max-w-xs">
-            Blue Oak will review your message and be in touch. If you'd prefer to speak sooner, use the scheduling option above.
+            Blue Oak will review your message and be in touch.
+            If you'd prefer to speak sooner, use the scheduling
+            option above.
           </p>
         </div>
       </motion.div>
@@ -90,50 +108,139 @@ function MessageForm() {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-      {/* Honeypot */}
-      <input type="text" name="__hp" tabIndex={-1} aria-hidden="true" style={{ display: "none" }} />
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className="space-y-4"
+    >
+      {/* Honeypot: intentionally hidden from users */}
+      <input
+        type="text"
+        name="__hp"
+        tabIndex={-1}
+        aria-hidden="true"
+        style={{ display: "none" }}
+      />
 
+      {/* Name and Business Name */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-sm font-medium">Name <span className="text-primary">*</span></label>
-          <input required name="name" type="text" placeholder="Your name"
-            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40" />
+          <label
+            htmlFor="name"
+            className="text-sm font-medium"
+          >
+            Name <span className="text-primary">*</span>
+          </label>
+
+          <input
+            id="name"
+            required
+            name="name"
+            type="text"
+            placeholder="Your name"
+            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+          />
         </div>
+
         <div className="space-y-1.5">
-          <label className="text-sm font-medium">Business Name <span className="text-primary">*</span></label>
-          <input required name="businessName" type="text" placeholder="Your business"
-            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40" />
+          <label
+            htmlFor="businessName"
+            className="text-sm font-medium"
+          >
+            Business Name <span className="text-primary">*</span>
+          </label>
+
+          <input
+            id="businessName"
+            required
+            name="businessName"
+            type="text"
+            placeholder="Your business"
+            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+          />
         </div>
       </div>
 
+      {/* Business Email and Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-sm font-medium">Business Email <span className="text-primary">*</span></label>
-          <input required name="businessEmail" type="email" placeholder="you@yourbusiness.com"
-            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40" />
+          <label
+            htmlFor="businessEmail"
+            className="text-sm font-medium"
+          >
+            Business Email <span className="text-primary">*</span>
+          </label>
+
+          <input
+            id="businessEmail"
+            required
+            name="businessEmail"
+            type="email"
+            placeholder="you@yourbusiness.com"
+            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+          />
         </div>
+
         <div className="space-y-1.5">
-          <label className="text-sm font-medium">Phone / WhatsApp</label>
-          <input name="phone" type="tel" placeholder="+1 or +876"
-            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40" />
+          <label
+            htmlFor="phone"
+            className="text-sm font-medium"
+          >
+            Phone / WhatsApp
+          </label>
+
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="+1 or +876"
+            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+          />
         </div>
       </div>
 
+      {/* Market and Industry */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-sm font-medium">Market</label>
-          <select name="market" defaultValue={knownMarket ?? ""}
-            onChange={(e) => { const v = e.target.value; if (v === "US" || v === "JM") setMarket(v); }}
-            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 appearance-none">
+          <label
+            htmlFor="market"
+            className="text-sm font-medium"
+          >
+            Market
+          </label>
+
+          <select
+            id="market"
+            name="market"
+            defaultValue={knownMarket ?? ""}
+            onChange={(e) => {
+              const v = e.target.value;
+
+              if (v === "US" || v === "JM") {
+                setMarket(v);
+              }
+            }}
+            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 appearance-none"
+          >
             <option value="">Select your market</option>
             <option value="US">United States</option>
             <option value="JM">Jamaica</option>
           </select>
         </div>
+
         <div className="space-y-1.5">
-          <label className="text-sm font-medium">Industry</label>
-          <select name="industry" className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 appearance-none">
+          <label
+            htmlFor="industry"
+            className="text-sm font-medium"
+          >
+            Industry
+          </label>
+
+          <select
+            id="industry"
+            name="industry"
+            className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 appearance-none"
+          >
             <option value="">Select your industry</option>
             <option>HVAC / Home Services</option>
             <option>Plumbing / Contracting</option>
@@ -147,9 +254,20 @@ function MessageForm() {
         </div>
       </div>
 
+      {/* General Business Challenge */}
       <div className="space-y-1.5">
-        <label className="text-sm font-medium">General Business Challenge</label>
-        <select name="challenge" className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 appearance-none">
+        <label
+          htmlFor="challenge"
+          className="text-sm font-medium"
+        >
+          General Business Challenge
+        </label>
+
+        <select
+          id="challenge"
+          name="challenge"
+          className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 appearance-none"
+        >
           <option value="">Select your primary challenge</option>
           <option>Not enough customers / leads</option>
           <option>Missing too many calls or inquiries</option>
@@ -162,24 +280,50 @@ function MessageForm() {
         </select>
       </div>
 
+      {/* Message */}
       <div className="space-y-1.5">
-        <label className="text-sm font-medium">Message <span className="text-muted-foreground/60">(optional)</span></label>
-        <textarea name="message" rows={3}
+        <label
+          htmlFor="message"
+          className="text-sm font-medium"
+        >
+          Message{" "}
+          <span className="text-muted-foreground/60">
+            (optional)
+          </span>
+        </label>
+
+        <textarea
+          id="message"
+          name="message"
+          rows={3}
           className="w-full bg-input border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none"
-          placeholder="Anything else you'd like Blue Oak to know…" />
+          placeholder="Anything else you'd like Blue Oak to know…"
+        />
       </div>
 
+      {/* Submission Error */}
       {submitError && (
-        <p className="text-sm text-red-400 rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-2.5">
+        <p
+          role="alert"
+          className="text-sm text-red-400 rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-2.5"
+        >
           {submitError}
         </p>
       )}
 
-      <Button type="submit" size="lg" disabled={submitting}
+      {/* Submit Button */}
+      <Button
+        type="submit"
+        size="lg"
+        disabled={submitting}
         className="w-full font-semibold shadow-[0_0_20px_rgba(212,175,55,0.2)] disabled:opacity-60 disabled:cursor-not-allowed"
-        data-testid="button-send-message">
+        data-testid="button-send-message"
+      >
         {submitting ? "Sending…" : "Send Message"}
-        {!submitting && <ArrowRight className="ml-2 w-4 h-4" />}
+
+        {!submitting && (
+          <ArrowRight className="ml-2 w-4 h-4" />
+        )}
       </Button>
     </form>
   );
@@ -191,8 +335,11 @@ function SchedulePanel() {
     return (
       <div className="rounded-xl border border-border/40 bg-card/20 p-7 text-center">
         <Calendar className="w-8 h-8 text-muted-foreground mx-auto mb-4" />
+
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Online scheduling is temporarily unavailable. Send Blue Oak a message using the form and we will arrange a consultation.
+          Online scheduling is temporarily unavailable.
+          Send Blue Oak a message using the form and we will
+          arrange a consultation.
         </p>
       </div>
     );
@@ -203,20 +350,35 @@ function SchedulePanel() {
       <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
         <Calendar className="w-7 h-7 text-primary" />
       </div>
+
       <div>
-        <p className="font-bold mb-2">Schedule a Consultation</p>
+        <p className="font-bold mb-2">
+          Schedule a Consultation
+        </p>
+
         <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-          Choose a real available time through Blue Oak's scheduling calendar.
-          Timezone conversion and conflict prevention are handled automatically.
+          Choose a real available time through Blue Oak's
+          scheduling calendar. Timezone conversion and conflict
+          prevention are handled automatically.
         </p>
       </div>
-      <Button asChild size="lg" className="w-full font-semibold shadow-[0_0_20px_rgba(212,175,55,0.25)]"
-        data-testid="button-view-times">
-        <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+
+      <Button
+        asChild
+        size="lg"
+        className="w-full font-semibold shadow-[0_0_20px_rgba(212,175,55,0.25)]"
+        data-testid="button-view-times"
+      >
+        <a
+          href={BOOKING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           View Available Times
           <ExternalLink className="ml-2 w-4 h-4" />
         </a>
       </Button>
+
       <p className="text-xs text-muted-foreground/60">
         Opens Blue Oak's Google Calendar scheduling page.
         Booking confirmation comes directly from Google Calendar.
@@ -238,14 +400,28 @@ export default function Contact() {
           animate="visible"
           className="text-center mb-16"
         >
-          <motion.p variants={fadeUp} className="text-primary text-xs font-semibold tracking-widest uppercase mb-4">
+          <motion.p
+            variants={fadeUp}
+            className="text-primary text-xs font-semibold tracking-widest uppercase mb-4"
+          >
             Talk With Blue Oak
           </motion.p>
-          <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+
+          <motion.h1
+            variants={fadeUp}
+            className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight"
+          >
             Let's Talk About Your Business
           </motion.h1>
-          <motion.p variants={fadeUp} className="text-muted-foreground text-xl max-w-2xl mx-auto">
-            Blue Oak works with businesses in Jamaica and the United States to identify and strengthen the systems behind revenue performance. Send a message or schedule a consultation.
+
+          <motion.p
+            variants={fadeUp}
+            className="text-muted-foreground text-xl max-w-2xl mx-auto"
+          >
+            Blue Oak works with businesses in Jamaica and the
+            United States to identify and strengthen the systems
+            behind revenue performance. Send a message or schedule
+            a consultation.
           </motion.p>
         </motion.div>
 
@@ -264,23 +440,59 @@ export default function Contact() {
             </motion.div>
 
             {/* Direct contact */}
-            <motion.div variants={fadeUp} className="space-y-3">
+            <motion.div
+              variants={fadeUp}
+              className="space-y-3"
+            >
               <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
                 Or Reach Us Directly
               </p>
+
               {[
-                { icon: <Mail className="w-4 h-4" />, text: BRAND.email, href: `mailto:${BRAND.email}` },
-                { icon: <Phone className="w-4 h-4" />, text: `${US.phone} — United States`, href: US.phoneHref },
-                { icon: <MessageSquare className="w-4 h-4" />, text: `${JM.whatsapp} — Jamaica (WhatsApp)`, href: JM.whatsappHref! },
-                { icon: <MapPin className="w-4 h-4" />, text: "Detroit, MI · Mandeville, Jamaica", href: null },
+                {
+                  icon: <Mail className="w-4 h-4" />,
+                  text: BRAND.email,
+                  href: `mailto:${BRAND.email}`,
+                },
+                {
+                  icon: <Phone className="w-4 h-4" />,
+                  text: `${US.phone} — United States`,
+                  href: US.phoneHref,
+                },
+                {
+                  icon: <MessageSquare className="w-4 h-4" />,
+                  text: `${JM.whatsapp} — Jamaica (WhatsApp)`,
+                  href: JM.whatsappHref!,
+                },
+                {
+                  icon: <MapPin className="w-4 h-4" />,
+                  text: "Detroit, MI · Mandeville, Jamaica",
+                  href: null,
+                },
               ].map((c, i) => (
-                <div key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <div className="text-primary">{c.icon}</div>
+                <div
+                  key={i}
+                  className="flex items-center gap-3 text-sm text-muted-foreground"
+                >
+                  <div className="text-primary">
+                    {c.icon}
+                  </div>
+
                   {c.href ? (
-                    <a href={c.href}
-                      target={c.href.startsWith("https") ? "_blank" : undefined}
-                      rel={c.href.startsWith("https") ? "noopener noreferrer" : undefined}
-                      className="hover:text-primary transition-colors">
+                    <a
+                      href={c.href}
+                      target={
+                        c.href.startsWith("https")
+                          ? "_blank"
+                          : undefined
+                      }
+                      rel={
+                        c.href.startsWith("https")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      className="hover:text-primary transition-colors"
+                    >
                       {c.text}
                     </a>
                   ) : (
@@ -291,10 +503,14 @@ export default function Contact() {
             </motion.div>
 
             {/* FAQ */}
-            <motion.div variants={fadeUp} className="space-y-3">
+            <motion.div
+              variants={fadeUp}
+              className="space-y-3"
+            >
               <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">
                 About Consultations
               </p>
+
               {[
                 {
                   q: "What happens during a consultation?",
@@ -309,9 +525,17 @@ export default function Contact() {
                   a: "No. Blue Oak works with businesses remotely across both markets.",
                 },
               ].map((faq, i) => (
-                <div key={i} className="rounded-xl border border-border/40 bg-card/20 p-4">
-                  <p className="text-sm font-bold mb-1.5">{faq.q}</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{faq.a}</p>
+                <div
+                  key={i}
+                  className="rounded-xl border border-border/40 bg-card/20 p-4"
+                >
+                  <p className="text-sm font-bold mb-1.5">
+                    {faq.q}
+                  </p>
+
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {faq.a}
+                  </p>
                 </div>
               ))}
             </motion.div>
@@ -329,17 +553,23 @@ export default function Contact() {
                 <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
                   <MessageSquare className="w-5 h-5 text-primary" />
                 </div>
+
                 <div>
-                  <p className="font-bold">Send Blue Oak a Message</p>
-                  <p className="text-xs text-muted-foreground">We'll respond within one business day.</p>
+                  <p className="font-bold">
+                    Send Blue Oak a Message
+                  </p>
+
+                  <p className="text-xs text-muted-foreground">
+                    We'll respond within one business day.
+                  </p>
                 </div>
               </div>
+
               <MessageForm />
             </div>
           </motion.div>
         </div>
-
       </div>
     </div>
   );
-}
+                      }
