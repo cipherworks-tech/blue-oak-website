@@ -1,87 +1,155 @@
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Globe, Info } from "lucide-react";
+import {
+  Check,
+  ArrowRight,
+  Globe,
+  Info,
+  Phone,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { US, BRAND } from "@/lib/marketConfig";
+import { US } from "@/lib/marketConfig";
+import { marketPath } from "@/lib/marketRoutes";
 
-const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
-const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
+const stagger = {
+  visible: {
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
+const SNAPSHOT_PATH = marketPath("US", "snapshot");
+const ASSESSMENT_PATH = marketPath("US", "assessment");
+const CONTACT_PATH = marketPath("US", "contact");
 
 const PACKAGES = [
   {
     name: "Community Impact",
-    prices: ["$497"],
-    note: "Approval required · Solo operators & community organisations",
+    prices: [US.pricing.communityImpact],
+    note:
+      "Approval required. Intended for qualifying solo operators and community organisations.",
     featured: false,
     restricted: true,
     features: [
-      "Missed call text-back (24/7)",
-      "Basic SMS/email intake flow",
-      "Appointment reminder sequence",
+      "Essential inquiry capture",
+      "Missed-call response support",
+      "Basic SMS and email intake",
+      "Social inquiry capture",
+      "Appointment reminders",
       "Monthly performance summary",
       "Email support",
     ],
-    cta: "Apply",
+    cta: "Apply for Consideration",
   },
   {
-    name: "Foundation",
-    prices: ["$497", "$897", "$1,497"],
-    note: "Build the infrastructure that makes revenue capture and conversion dependable.",
+    name: "Foundation System™",
+    prices: US.pricing.foundation,
+    note:
+      "Build the essential infrastructure for visibility, inquiry capture, response, and follow-up.",
     featured: false,
     restricted: false,
     features: [
       "Visibility and inquiry pathways",
+      "Social Revenue Capture",
       "Lead capture and response",
       "Appointment booking and confirmation",
       "Lead routing and qualification",
       "Pipeline visibility",
       "Follow-up infrastructure",
     ],
-    cta: "Get Started",
+    cta: "Request Revenue Snapshot",
   },
   {
-    name: "Revenue Recovery",
-    prices: ["$1,197", "$2,497", "$3,997"],
-    note: "Recover revenue already being lost through missed calls, weak follow-up, no-shows, and inactive customers.",
+    name: "Recovery System™",
+    prices: US.pricing.recovery,
+    note:
+      "Recover opportunities lost through missed inquiries, delayed response, inconsistent follow-up, and inactive customers.",
     featured: true,
     restricted: false,
     features: [
-      "Everything in Foundation",
+      "Foundation capabilities as scoped",
+      "Social inquiry capture and recovery",
       "Missed-call revenue recovery",
       "Multi-channel follow-up",
       "Lead qualification and routing",
       "No-show and cancellation recovery",
       "Customer reactivation",
       "Win-back campaign automation",
+      "Revenue recovery measurement",
     ],
-    cta: "Get Started",
+    cta: "Request Revenue Snapshot",
   },
   {
-    name: "Revenue Engine",
-    prices: ["$1,797", "$3,497", "$5,497"],
-    note: "Full revenue infrastructure for businesses ready to build, measure, and continuously optimize the entire revenue cycle.",
+    name: "Engine System™",
+    prices: US.pricing.engine,
+    note:
+      "Connected Revenue Infrastructure for businesses ready to coordinate demand, leads, opportunities, automation, and measurement.",
     featured: false,
     restricted: false,
     features: [
-      "Everything in Revenue Recovery",
-      "Full intake-to-conversion flow",
-      "Real-time pipeline visibility",
-      "Advanced follow-up and reactivation",
+      "Recovery capabilities as scoped",
+      "Demand Intelligence",
+      "Lead Intelligence",
+      "Opportunity Intelligence",
+      "Integrated Social Revenue Capture",
+      "CRM and workflow integration",
+      "AI-assisted operations with human oversight",
       "Revenue reporting and intelligence",
-      "Custom automation capacity",
       "Continuous optimization",
     ],
-    cta: "Get Started",
+    cta: "Request Revenue Snapshot",
   },
 ];
 
 const FAQS = [
-  { q: "Does implementation begin without a diagnosis?", a: "No. Blue Oak recommends a Revenue Snapshot™ or Revenue Infrastructure Assessment™ before implementation. The right package is determined by what your business actually needs — not a generic recommendation." },
-  { q: "What is the Revenue Infrastructure Assessment™?", a: "A comprehensive paid diagnostic that examines your complete revenue cycle across 8+ dimensions — visibility, lead capture, response, qualification, conversion, follow-up, retention, measurement, and more. Assessment pricing is provided during consultation." },
-  { q: "Are there any additional costs?", a: "Any applicable third-party tool costs and any onboarding arrangements are set out during the Revenue Infrastructure Assessment™ and confirmed in your service agreement before work begins." },
-  { q: "What does third-party tool cost mean?", a: "Some automations and systems use third-party platforms such as communication tools or CRM software. Where relevant, these costs are identified and disclosed before any deployment begins." },
-  { q: "What are the contract terms?", a: "Plans are billed monthly. The specific term, notice period and cancellation arrangements are confirmed in your service agreement before any engagement begins." },
-  { q: "What industries do you serve in the U.S.?", a: "Local and regional service businesses — HVAC and home services, plumbing and electrical, contractors, law firms, real estate, restaurants and hospitality, auto sales and service, and professional services. Blue Oak solves Revenue Infrastructure problems, so the underlying systems apply across many business types." },
+  {
+    q: "Does implementation begin without a diagnosis?",
+    a:
+      "No. Blue Oak begins by understanding the business through a Revenue Snapshot™ and, where appropriate, a Revenue Infrastructure Assessment™. Recommendations are based on identified needs rather than a generic package selection.",
+  },
+  {
+    q: "What is the Revenue Infrastructure Assessment™?",
+    a:
+      "A comprehensive paid diagnostic examining visibility, lead capture, response, qualification, conversion, follow-up, retention, measurement, and other revenue operations. Assessment pricing is provided during consultation.",
+  },
+  {
+    q: "Are third-party costs included?",
+    a:
+      "Not necessarily. Telecommunications, SMS, AI and voice usage, WhatsApp services, email delivery, advertising, CRM subscriptions, software licences, and other third-party costs may be additional. Applicable expenses are disclosed before implementation.",
+  },
+  {
+    q: "Are the three prices different service levels?",
+    a:
+      "Yes. Each system has Starter, Growth, and Premium pricing levels. The appropriate scope and level are determined through diagnosis and confirmed in the service agreement.",
+  },
+  {
+    q: "Is Social Revenue Capture included?",
+    a:
+      "Yes. Social inquiry capture is part of the Foundation, Recovery, and Engine Systems. The depth of automation and integration depends on the selected scope.",
+  },
+  {
+    q: "What are the contract terms?",
+    a:
+      "Published package prices are monthly. Contract duration, implementation arrangements, notice periods, cancellation provisions, and applicable usage costs are confirmed before engagement.",
+  },
+  {
+    q: "What industries does Blue Oak serve?",
+    a:
+      "Blue Oak serves home services, contractors, professional services, real estate, hospitality, automotive businesses, and other organisations with revenue infrastructure needs. Regulated or sensitive-data workflows require appropriate compliance controls before deployment.",
+  },
+  {
+    q: "Can Blue Oak support multiple locations?",
+    a:
+      "Yes. Multi-location and more complex operations can request a custom infrastructure proposal following an assessment of their requirements.",
+  },
 ];
 
 export default function PricingUS() {
@@ -89,145 +157,332 @@ export default function PricingUS() {
     <div className="pt-24 min-h-screen text-foreground">
       <div className="container mx-auto px-4 max-w-6xl py-16">
 
-        {/* Header */}
-        <motion.div variants={stagger} initial="hidden" animate="visible" className="text-center mb-14">
-          <motion.div variants={fadeUp}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card/50 border border-border/50 text-muted-foreground mb-6">
+        {/* HEADER */}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+          className="text-center mb-14"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card/50 border border-border/50 text-muted-foreground mb-6"
+          >
             <Globe className="w-3.5 h-3.5 text-primary" />
-            <span className="text-xs font-semibold tracking-widest uppercase">United States · USD Pricing</span>
+
+            <span className="text-xs font-semibold tracking-widest uppercase">
+              United States · USD Pricing
+            </span>
           </motion.div>
-          <motion.h1 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold tracking-tight mb-5 leading-tight">
+
+          <motion.h1
+            variants={fadeUp}
+            className="text-4xl md:text-5xl font-extrabold tracking-tight mb-5 leading-tight"
+          >
             Revenue Infrastructure for U.S. Businesses
           </motion.h1>
-          <motion.p variants={fadeUp} className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
-            Built for home services, contractors, law firms, real estate, auto service, and professional services that need stronger lead capture, faster response, better conversion, and full pipeline visibility.
+
+          <motion.p
+            variants={fadeUp}
+            className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8"
+          >
+            Build the systems that help your business
+            capture opportunities, respond faster,
+            recover missed revenue, and improve
+            performance across the customer journey.
           </motion.p>
+
+          <p className="text-sm text-primary font-semibold">
+            Blue Oak Automation LLC · Michigan, United States
+          </p>
         </motion.div>
 
-        {/* Assessment gateway */}
+        {/* DIAGNOSIS FIRST */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="rounded-2xl border border-primary/20 bg-primary/[0.03] p-7 mb-10"
         >
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
               <Info className="w-5 h-5 text-primary" />
             </div>
+
             <div className="flex-1">
-              <h3 className="font-bold mb-2">Diagnosis Comes Before Implementation</h3>
+              <h2 className="font-bold mb-2">
+                Diagnosis Before Prescription
+              </h2>
+
               <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                Blue Oak does not recommend an implementation package without first understanding the business. Start with a complimentary Revenue Snapshot™ or discuss a Revenue Infrastructure Assessment™ — the paid comprehensive diagnostic. The right package is determined by the Assessment findings, not by a generic recommendation.
+                Blue Oak does not recommend implementation
+                packages without understanding the business.
+                Start with a complimentary Revenue Snapshot™
+                or discuss a comprehensive paid Revenue
+                Infrastructure Assessment™.
               </p>
+
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button asChild size="sm" className="font-semibold">
-                  <Link href={BRAND.snapshotPath}>Request Revenue Snapshot™ <ArrowRight className="ml-1.5 w-3.5 h-3.5" /></Link>
+                <Button
+                  asChild
+                  size="sm"
+                  className="font-semibold"
+                >
+                  <Link href={SNAPSHOT_PATH}>
+                    Request Revenue Snapshot™
+                    <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
+                  </Link>
                 </Button>
-                <Button asChild variant="outline" size="sm" className="font-semibold bg-transparent border-border hover:bg-white/5">
-                  <Link href={BRAND.assessmentPath}>Learn About the Assessment</Link>
+
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="font-semibold bg-transparent border-border hover:bg-white/5"
+                >
+                  <Link href={ASSESSMENT_PATH}>
+                    Learn About the Assessment
+                  </Link>
                 </Button>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Packages */}
+        {/* PACKAGES */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-          {PACKAGES.map((pkg, i) => (
+          {PACKAGES.map((pkg, index) => (
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }}
-              className={`rounded-2xl flex flex-col ${pkg.featured
-                ? "border border-primary/30 bg-primary/[0.04] shadow-[0_0_32px_rgba(212,175,55,0.1)]"
-                : "border border-border/50 bg-card/20"}`}
+              key={pkg.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.4,
+                delay: index * 0.07,
+              }}
+              className={`rounded-2xl flex flex-col ${
+                pkg.featured
+                  ? "border border-primary/30 bg-primary/[0.04] shadow-[0_0_32px_rgba(212,175,55,0.1)]"
+                  : "border border-border/50 bg-card/20"
+              }`}
             >
               {pkg.featured && (
                 <div className="bg-primary text-primary-foreground text-xs font-black tracking-widest uppercase text-center py-2 rounded-t-2xl">
-                  ★ Most Popular
+                  Featured System
                 </div>
               )}
+
               <div className="p-6 flex flex-col flex-1">
-                <p className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">{pkg.name}</p>
+                <p className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">
+                  {pkg.name}
+                </p>
+
                 <div className="space-y-1.5 mb-1">
-                  {pkg.prices.map((price, j) => (
-                    <div key={j} className="flex items-baseline gap-2">
-                      <span className="text-2xl font-extrabold">{price}</span>
+                  {pkg.prices.map((price, tierIndex) => (
+                    <div
+                      key={tierIndex}
+                      className="flex items-baseline gap-2"
+                    >
+                      <span className="text-2xl font-extrabold">
+                        {price}
+                      </span>
+
                       {pkg.prices.length > 1 && (
                         <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                          {j === 0 ? "Starter" : j === 1 ? "Growth" : "Premium"}
+                          {tierIndex === 0
+                            ? "Starter"
+                            : tierIndex === 1
+                            ? "Growth"
+                            : "Premium"}
                         </span>
                       )}
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-muted-foreground mb-1">{US.billingPeriod}</p>
-                <p className="text-xs text-muted-foreground/60 mb-5 italic">{pkg.note}</p>
+
+                <p className="text-xs text-muted-foreground mb-1">
+                  {US.billingPeriod}
+                </p>
+
+                <p className="text-xs text-muted-foreground/60 mb-5 italic">
+                  {pkg.note}
+                </p>
+
                 <ul className="space-y-2.5 mb-6 flex-1">
-                  {pkg.features.map((f, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm">
+                  {pkg.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-2 text-sm"
+                    >
                       <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{f}</span>
+
+                      <span className="text-muted-foreground">
+                        {feature}
+                      </span>
                     </li>
                   ))}
                 </ul>
-                <Button asChild size="sm" variant={pkg.featured ? "default" : "outline"}
-                  className={`w-full font-semibold ${!pkg.featured ? "bg-transparent border-border hover:bg-white/5" : ""}`}>
-                  <Link href={BRAND.snapshotPath}>{pkg.cta} <ArrowRight className="ml-1.5 w-3.5 h-3.5" /></Link>
+
+                <Button
+                  asChild
+                  size="sm"
+                  variant={
+                    pkg.featured ? "default" : "outline"
+                  }
+                  className={`w-full font-semibold ${
+                    !pkg.featured
+                      ? "bg-transparent border-border hover:bg-white/5"
+                      : ""
+                  }`}
+                >
+                  <Link href={SNAPSHOT_PATH}>
+                    {pkg.cta}
+                    <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
+                  </Link>
                 </Button>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Custom note */}
+        {/* THIRD-PARTY COSTS */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="rounded-xl border border-primary/20 bg-primary/[0.03] p-6 mb-10"
+        >
+          <h2 className="font-bold mb-3">
+            Pricing and Third-Party Costs
+          </h2>
+
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            All prices are in United States dollars (USD)
+            and represent published monthly service-package
+            pricing. Third-party expenses may be additional,
+            including telecommunications, SMS, AI and voice
+            usage, WhatsApp services, email delivery,
+            advertising, CRM subscriptions, and software
+            licensing. Any implementation charges and
+            usage-based costs will be confirmed before
+            an engagement begins.
+          </p>
+        </motion.div>
+
+        {/* CUSTOM PROPOSAL */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="rounded-xl border border-border/40 bg-card/20 p-6 mb-14 flex flex-col md:flex-row md:items-center gap-4 justify-between"
         >
           <div>
-            <p className="font-semibold mb-1">Need a custom or enterprise build?</p>
-            <p className="text-muted-foreground text-sm">Multi-location businesses and complex operations can request a custom infrastructure proposal.</p>
+            <p className="font-semibold mb-1">
+              Need a Custom or Enterprise Build?
+            </p>
+
+            <p className="text-muted-foreground text-sm">
+              Multi-location businesses and complex
+              operations can request a custom
+              infrastructure proposal.
+            </p>
           </div>
-          <Button asChild variant="outline" className="font-semibold flex-shrink-0 bg-transparent border-border hover:bg-white/5">
-            <Link href="/contact">Request Custom Proposal</Link>
+
+          <Button
+            asChild
+            variant="outline"
+            className="font-semibold flex-shrink-0 bg-transparent border-border hover:bg-white/5"
+          >
+            <Link href={CONTACT_PATH}>
+              Request Custom Proposal
+            </Link>
           </Button>
         </motion.div>
 
         {/* FAQ */}
-        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <motion.div variants={fadeUp} className="mb-7">
-            <p className="text-primary text-xs font-semibold tracking-widest uppercase mb-3">Common Questions</p>
-            <h2 className="text-2xl font-extrabold tracking-tight">U.S. Pricing FAQ</h2>
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div
+            variants={fadeUp}
+            className="mb-7"
+          >
+            <p className="text-primary text-xs font-semibold tracking-widest uppercase mb-3">
+              Common Questions
+            </p>
+
+            <h2 className="text-2xl font-extrabold tracking-tight">
+              United States Pricing FAQ
+            </h2>
           </motion.div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-14">
-            {FAQS.map((faq, i) => (
-              <motion.div key={i} variants={fadeUp}
-                className="rounded-xl border border-border/40 bg-card/20 p-6">
-                <h3 className="font-bold mb-2 text-sm">{faq.q}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{faq.a}</p>
+            {FAQS.map((faq) => (
+              <motion.div
+                key={faq.q}
+                variants={fadeUp}
+                className="rounded-xl border border-border/40 bg-card/20 p-6"
+              >
+                <h3 className="font-bold mb-2 text-sm">
+                  {faq.q}
+                </h3>
+
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {faq.a}
+                </p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* CTA */}
+        {/* DIRECT CONTACT */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="rounded-3xl border border-primary/20 bg-primary/[0.03] p-12 text-center"
+          className="rounded-xl border border-border/40 bg-card/20 p-6 mb-10 text-center"
         >
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">Start with a Revenue Snapshot™</h2>
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
-            The right package starts with understanding your business. Request a complimentary Revenue Snapshot™ and see where the gaps are.
+          <p className="font-semibold mb-3">
+            Questions About United States Pricing?
           </p>
-          <Button size="lg" asChild className="font-semibold px-10 shadow-[0_0_24px_rgba(212,175,55,0.3)]">
-            <Link href={BRAND.snapshotPath}>Request Revenue Snapshot™ <ArrowRight className="ml-2 w-4 h-4" /></Link>
-          </Button>
+
+          <a
+            href={US.phoneHref}
+            className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
+          >
+            <Phone className="w-4 h-4" />
+            {US.phone}
+          </a>
         </motion.div>
 
-      </div>
-    </div>
-  );
-}
+        {/* FINAL CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="rounded-3xl border border-primary/20 bg-primary/[0.03] p-8 md:p-12 text-center"
+        >
+          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4">
+            Start with a Revenue Snapshot™
+          </h2>
+
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
+            The right system starts with understanding
+            your business. Request a complimentary
+            Revenue Snapshot™ and discover where
+            revenue opportunities may be slipping away.
+          </p>
+
+          <Button
+            size="lg"
+            asChild
+            className="font-semibold px-10 shadow-[0_0_24px_rgba(212,175,55,0.3)]"
+          >
+            <Link href={SNAPSHOT_PATH}>
+              Request Revenue Snapshot™
+              <ArrowRight class
