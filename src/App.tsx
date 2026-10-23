@@ -1,7 +1,19 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
+import {
+  Switch,
+  Route,
+  Router as WouterRouter,
+  useLocation,
+} from "wouter";
+
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+
 import NotFound from "@/pages/not-found";
 
 import Navbar from "@/components/layout/Navbar";
@@ -37,24 +49,117 @@ import IndustryPage from "@/pages/IndustryPage";
 
 const queryClient = new QueryClient();
 
+/**
+ * BLUE OAK — SCROLL RESTORATION
+ *
+ * Ensures that internal navigation starts at the top
+ * of the destination page.
+ *
+ * Preserves intentional anchor navigation.
+ *
+ * Works across:
+ * - United States pages
+ * - Jamaica pages
+ * - Blog pages
+ * - Industry pages
+ * - Revenue Intelligence pages
+ */
+function ScrollRestoration() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    const hash = window.location.hash;
+
+    if (!hash) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+
+      return;
+    }
+
+    let targetId = "";
+
+    try {
+      targetId = decodeURIComponent(hash.substring(1));
+    } catch {
+      targetId = hash.substring(1);
+    }
+
+    let attempts = 0;
+
+    const scrollToTarget = () => {
+      const target = document.getElementById(targetId);
+
+      if (target) {
+        target.scrollIntoView({
+          behavior: "auto",
+          block: "start",
+        });
+
+        return;
+      }
+
+      attempts += 1;
+
+      if (attempts < 10) {
+        requestAnimationFrame(scrollToTarget);
+      } else {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "auto",
+        });
+      }
+    };
+
+    requestAnimationFrame(scrollToTarget);
+  }, [location]);
+
+  return null;
+}
+
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
+
+      {/* GLOBAL NAVIGATION */}
       <Navbar />
+
+      {/* GLOBAL SCROLL CORRECTION */}
+      <ScrollRestoration />
 
       <main className="flex-grow">
         <Switch>
 
-          {/* =========================================
+          {/* =====================================
               UNITED STATES — REGIONAL ROUTES
-              ========================================= */}
+              ===================================== */}
 
           <Route path="/us" component={Home} />
           <Route path="/us/" component={Home} />
-          <Route path="/us/services" component={Services} />
-          <Route path="/us/pricing" component={PricingUS} />
-          <Route path="/us/contact" component={Contact} />
-          <Route path="/us/about" component={About} />
+
+          <Route
+            path="/us/services"
+            component={Services}
+          />
+
+          <Route
+            path="/us/pricing"
+            component={PricingUS}
+          />
+
+          <Route
+            path="/us/contact"
+            component={Contact}
+          />
+
+          <Route
+            path="/us/about"
+            component={About}
+          />
 
           <Route
             path="/us/revenue-snapshot"
@@ -71,22 +176,52 @@ function Router() {
             component={RevenueIntelligenceFAQ}
           />
 
-          <Route path="/us/industries" component={Industries} />
-          <Route path="/us/industries/:slug" component={IndustryPage} />
+          <Route
+            path="/us/industries"
+            component={Industries}
+          />
 
-          <Route path="/us/blog" component={Blog} />
-          <Route path="/us/blog/:slug" component={BlogPost} />
+          <Route
+            path="/us/industries/:slug"
+            component={IndustryPage}
+          />
 
-          {/* =========================================
+          <Route
+            path="/us/blog"
+            component={Blog}
+          />
+
+          <Route
+            path="/us/blog/:slug"
+            component={BlogPost}
+          />
+
+          {/* =====================================
               JAMAICA — REGIONAL ROUTES
-              ========================================= */}
+              ===================================== */}
 
           <Route path="/jm" component={Home} />
           <Route path="/jm/" component={Home} />
-          <Route path="/jm/services" component={Services} />
-          <Route path="/jm/pricing" component={PricingJamaica} />
-          <Route path="/jm/contact" component={Contact} />
-          <Route path="/jm/about" component={About} />
+
+          <Route
+            path="/jm/services"
+            component={Services}
+          />
+
+          <Route
+            path="/jm/pricing"
+            component={PricingJamaica}
+          />
+
+          <Route
+            path="/jm/contact"
+            component={Contact}
+          />
+
+          <Route
+            path="/jm/about"
+            component={About}
+          />
 
           <Route
             path="/jm/revenue-snapshot"
@@ -103,26 +238,80 @@ function Router() {
             component={RevenueIntelligenceFAQ}
           />
 
-          <Route path="/jm/industries" component={Industries} />
-          <Route path="/jm/industries/:slug" component={IndustryPage} />
+          <Route
+            path="/jm/industries"
+            component={Industries}
+          />
 
-          <Route path="/jm/blog" component={Blog} />
-          <Route path="/jm/blog/:slug" component={BlogPost} />
+          <Route
+            path="/jm/industries/:slug"
+            component={IndustryPage}
+          />
 
-          {/* =========================================
-              EXISTING ROUTES — PRESERVED
-              ========================================= */}
+          <Route
+            path="/jm/blog"
+            component={Blog}
+          />
+
+          <Route
+            path="/jm/blog/:slug"
+            component={BlogPost}
+          />
+
+          {/* =====================================
+              GENERAL WEBSITE ROUTES
+              ===================================== */}
 
           <Route path="/" component={Home} />
-          <Route path="/services" component={Services} />
-          <Route path="/pricing" component={Pricing} />
-          <Route path="/pricing/jamaica" component={PricingJamaica} />
-          <Route path="/pricing/united-states" component={PricingUS} />
-          <Route path="/testimonials" component={Testimonials} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/blog" component={Blog} />
-          <Route path="/blog/:slug" component={BlogPost} />
-          <Route path="/about" component={About} />
+
+          <Route
+            path="/services"
+            component={Services}
+          />
+
+          <Route
+            path="/pricing"
+            component={Pricing}
+          />
+
+          <Route
+            path="/pricing/jamaica"
+            component={PricingJamaica}
+          />
+
+          <Route
+            path="/pricing/united-states"
+            component={PricingUS}
+          />
+
+          <Route
+            path="/testimonials"
+            component={Testimonials}
+          />
+
+          <Route
+            path="/contact"
+            component={Contact}
+          />
+
+          <Route
+            path="/blog"
+            component={Blog}
+          />
+
+          <Route
+            path="/blog/:slug"
+            component={BlogPost}
+          />
+
+          <Route
+            path="/about"
+            component={About}
+          />
+
+          {/* =====================================
+              REVENUE INFRASTRUCTURE ROUTES
+              ===================================== */}
 
           <Route
             path="/revenue-snapshot"
@@ -134,7 +323,10 @@ function Router() {
             component={RevenueInfrastructureAssessment}
           />
 
-          <Route path="/revenue-audit" component={RevenueAudit} />
+          <Route
+            path="/revenue-audit"
+            component={RevenueAudit}
+          />
 
           <Route
             path="/revenue-recovery-scenarios"
@@ -161,13 +353,38 @@ function Router() {
             component={WhyMarketingFails}
           />
 
-          <Route path="/privacy" component={Privacy} />
-          <Route path="/terms" component={Terms} />
+          {/* =====================================
+              LEGAL ROUTES
+              ===================================== */}
 
-          <Route path="/industries" component={Industries} />
-          <Route path="/industries/:slug" component={IndustryPage} />
+          <Route
+            path="/privacy"
+            component={Privacy}
+          />
 
-          {/* 404 */}
+          <Route
+            path="/terms"
+            component={Terms}
+          />
+
+          {/* =====================================
+              INDUSTRY ROUTES
+              ===================================== */}
+
+          <Route
+            path="/industries"
+            component={Industries}
+          />
+
+          <Route
+            path="/industries/:slug"
+            component={IndustryPage}
+          />
+
+          {/* =====================================
+              404 — PAGE NOT FOUND
+              ===================================== */}
+
           <Route component={NotFound} />
 
         </Switch>
