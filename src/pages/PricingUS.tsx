@@ -485,4 +485,12 @@ export default function PricingUS() {
           >
             <Link href={SNAPSHOT_PATH}>
               Request Revenue Snapshot™
-              <ArrowRight class
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Link>
+          </Button>
+        </motion.div>
+
+      </div>
+    </div>
+  );
+}
