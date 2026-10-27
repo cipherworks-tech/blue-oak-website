@@ -146,15 +146,15 @@ const JOURNEY = [
 ];
 
 const INDUSTRIES = [
-  "HVAC",
-  "Plumbing",
-  "Electrical Services",
-  "Contractors & Home Improvement",
-  "Law Firms",
-  "Real Estate",
-  "Restaurants & Hospitality",
-  "Auto Sales & Service",
-  "Professional Services",
+  { name: "HVAC", slug: "home-services" },
+  { name: "Plumbing", slug: "home-services" },
+  { name: "Electrical Services", slug: "home-services" },
+  { name: "Contractors & Home Improvement", slug: "home-services" },
+  { name: "Law Firms", slug: "law-firms" },
+  { name: "Real Estate", slug: "real-estate" },
+  { name: "Restaurants & Hospitality", slug: "hospitality-tourism" },
+  { name: "Auto Sales & Service", slug: "auto-sales-service" },
+  { name: "Professional Services", slug: "" },
 ];
 
 const SEQUENCE = [
@@ -809,13 +809,18 @@ export default function Home() {
               variants={fadeUp}
               className="flex flex-wrap justify-center gap-2 mb-8"
             >
-              {INDUSTRIES.map((industry, i) => (
-                <span
-                  key={i}
-                  className="text-sm text-muted-foreground bg-card/30 border border-border/40 px-3 py-1.5 rounded-full"
+                            {INDUSTRIES.map((industry) => (
+                <Link
+                  key={industry.name}
+                  href={
+                    industry.slug
+                      ? `${industriesPath}/${industry.slug}`
+                      : industriesPath
+                  }
+                  className="inline-flex items-center justify-center max-w-full text-center text-sm text-muted-foreground hover:text-primary hover:border-primary/50 bg-card/30 border border-border/40 px-3 py-2 rounded-full transition-colors"
                 >
-                  {industry}
-                </span>
+                  {industry.name}
+                </Link>
               ))}
             </motion.div>
 
