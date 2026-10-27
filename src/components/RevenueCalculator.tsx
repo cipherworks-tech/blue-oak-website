@@ -398,16 +398,21 @@ export default function RevenueCalculator() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <Button
-                    asChild
-                    size="lg"
-                    className="w-full font-semibold text-base shadow-[0_0_20px_rgba(212,175,55,0.25)] hover:shadow-[0_0_36px_rgba(212,175,55,0.45)] transition-shadow"
+                                                    <Button
+                  asChild
+                  size="lg"
+                  className="w-full max-w-full h-auto min-h-12 px-3 sm:px-6 py-3 font-semibold text-sm sm:text-base whitespace-normal text-center shadow-[0_0_20px_rgba(212,175,55,0.25)] hover:shadow-[0_0_36px_rgba(212,175,55,0.45)] transition-shadow"
+                >
+                  <Link
+                    href={snapshotPath}
+                    className="flex items-center justify-center gap-2 min-w-0"
                   >
-                    <Link href={snapshotPath}>
+                    <span className="min-w-0 break-words text-center leading-snug">
                       See What Your Business Is Actually Losing
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </Link>
-                  </Button>
+                    </span>
+                    <ArrowRight className="w-4 h-4 shrink-0" />
+                  </Link>
+                </Button>
                 </motion.div>
               </AnimatePresence>
             </div>
