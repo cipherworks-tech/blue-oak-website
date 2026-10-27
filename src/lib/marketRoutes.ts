@@ -25,13 +25,6 @@ const MARKET_PATHS: Record<MarketPage, string> = {
   blog: "blog",
 };
 
-/**
- * Returns the canonical URL for a page in a specific market.
- *
- * Examples:
- * marketPath("US", "services") -> "/us/services"
- * marketPath("JM", "pricing") -> "/jm/pricing"
- */
 export function marketPath(
   market: MarketKey,
   page: MarketPage
@@ -42,11 +35,6 @@ export function marketPath(
   return suffix ? `${prefix}/${suffix}` : `${prefix}/`;
 }
 
-/**
- * Determines the market from the URL.
- *
- * URL market always takes priority over stored preference.
- */
 export function marketFromPath(
   pathname: string
 ): MarketKey | null {
@@ -56,15 +44,17 @@ export function marketFromPath(
   return null;
 }
 
-/**
- * Identifies the corresponding page when switching markets.
- */
 export function pageFromPath(
   pathname: string
 ): MarketPage {
   const normalized = pathname
+    .split(/[?#]/)[0]
     .replace(/^\/(us|jm)(?=\/|$)/i, "")
     .replace(/^\/+|\/+$/g, "");
+
+  if (/^industries\/[^/]+$/.test(normalized)) {
+    return "industries";
+  }
 
   const entry = (
     Object.entries(MARKET_PATHS) as [MarketPage, string][]
@@ -73,19 +63,23 @@ export function pageFromPath(
   return entry?.[0] ?? "home";
 }
 
-/**
- * Returns the equivalent page in another market.
- *
- * Example:
- * equivalentMarketPath("/us/services", "JM")
- * -> "/jm/services"
- */
 export function equivalentMarketPath(
   pathname: string,
   targetMarket: MarketKey
 ): string {
+  const cleanPath = pathname.split(/[?#]/)[0];
+
+  const normalized = cleanPath
+    .replace(/^\/(us|jm)(?=\/|$)/i, "")
+    .replace(/^\/+|\/+$/g, "");
+
+  // Preserve the selected industry when changing markets.
+  if (/^industries\/[^/]+$/.test(normalized)) {
+    return `/${targetMarket.toLowerCase()}/${normalized}`;
+  }
+
   return marketPath(
     targetMarket,
-    pageFromPath(pathname)
+    pageFromPath(cleanPath)
   );
 }
