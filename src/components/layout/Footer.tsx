@@ -1,16 +1,34 @@
 import { Link, useLocation } from "wouter";
 import BlueOakLogo from "@/components/brand/BlueOakLogo";
-import { BRAND, MARKETS, US, JM } from "@/lib/marketConfig";
-import { useMarketPreference } from "@/lib/useMarketPreference";
-import { marketFromPath, marketPath } from "@/lib/marketRoutes";
+
+import {
+  BRAND,
+  MARKETS,
+  US,
+  JM,
+} from "@/lib/marketConfig";
+
 import type { MarketKey } from "@/lib/marketConfig";
+
+import { useMarketPreference } from "@/lib/useMarketPreference";
+
+import {
+  marketFromPath,
+  marketPath,
+} from "@/lib/marketRoutes";
 
 const INDUSTRIES = [
   { name: "Home Services", slug: "home-services" },
   { name: "Law Firms", slug: "law-firms" },
   { name: "Real Estate", slug: "real-estate" },
-  { name: "Hospitality & Tourism", slug: "hospitality-tourism" },
-  { name: "Auto Sales & Service", slug: "auto-sales-service" },
+  {
+    name: "Hospitality & Tourism",
+    slug: "hospitality-tourism",
+  },
+  {
+    name: "Auto Sales & Service",
+    slug: "auto-sales-service",
+  },
 ];
 
 const EDUCATION = [
@@ -34,57 +52,67 @@ const EDUCATION = [
 
 export default function Footer() {
   const [location] = useLocation();
-  const { market: storedMarket } = useMarketPreference();
 
-  // Regional URL is authoritative.
+  const { market: storedMarket } =
+    useMarketPreference();
+
+  // An explicit regional URL takes priority.
   const urlMarket = marketFromPath(location);
 
-  // Stored preference is used only for legacy pages.
-  const market: MarketKey | null = urlMarket ?? storedMarket;
+  // Otherwise, use the visitor's saved selection.
+  const market: MarketKey | null =
+    urlMarket ?? storedMarket;
 
-  const isRegional = urlMarket !== null;
-
-  const config = market ? MARKETS[market] : null;
+  const config = market
+    ? MARKETS[market]
+    : null;
 
   function route(path: string): string {
-    if (!isRegional || !urlMarket) return path;
+    if (!market) return path;
 
     if (path === "/") {
-      return marketPath(urlMarket, "home");
+      return marketPath(market, "home");
     }
 
-    return `/${urlMarket.toLowerCase()}/${path.replace(/^\/+/, "")}`;
+    return `/${market.toLowerCase()}/${path.replace(
+      /^\/+/,
+      ""
+    )}`;
   }
 
   function pricingRoute(): string {
-    if (urlMarket) {
-      return marketPath(urlMarket, "pricing");
-    }
-
-    return market ? MARKETS[market].pricingPath : "/pricing";
+    return market
+      ? marketPath(market, "pricing")
+      : "/pricing";
   }
 
-  const copyright = isRegional
-    ? urlMarket === "US"
-      ? `${US.legalEntity}. ${US.legalEntityNote}.`
-      : `${JM.legalEntityNote}.`
-    : `${BRAND.name}.`;
+  const legalNote = config
+    ? config.legalEntityNote
+    : null;
+
+  const copyright = market === "US"
+    ? US.legalEntity
+    : BRAND.name;
 
   return (
     <footer className="bg-secondary/20 border-t border-border/50 mt-20">
       <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-10">
 
-          {/* Brand */}
+          {/* BRAND */}
           <div className="md:col-span-2">
-            <Link href={route("/")} className="inline-block mb-5">
+            <Link
+              href={route("/")}
+              className="inline-block mb-5"
+            >
               <BlueOakLogo className="h-[96px]" />
             </Link>
 
             <p className="text-sm text-muted-foreground mb-4 max-w-xs leading-relaxed">
-              Most businesses lose customers every day — through missed
-              calls, slow follow-up, and no system to bring them back.
-              We build the infrastructure that stops it.
+              Most businesses lose customers every day —
+              through missed calls, slow follow-up, and no
+              system to bring them back. We build the
+              infrastructure that stops it.
             </p>
 
             <p className="text-xs text-primary/80 font-medium italic mb-5 max-w-xs">
@@ -97,15 +125,16 @@ export default function Footer() {
               {BRAND.name}
             </p>
 
-            {isRegional && config ? (
+            {legalNote ? (
               <p className="text-xs text-muted-foreground/50">
-                {config.legalEntityNote}
+                {legalNote}
               </p>
             ) : (
               <>
                 <p className="text-xs text-muted-foreground/50 mb-1">
                   {US.legalEntityNote}
                 </p>
+
                 <p className="text-xs text-muted-foreground/50">
                   {JM.legalEntityNote}
                 </p>
@@ -113,7 +142,7 @@ export default function Footer() {
             )}
           </div>
 
-          {/* How We Help */}
+          {/* HOW WE HELP */}
           <div>
             <h4 className="font-semibold mb-4 text-foreground text-sm tracking-wide">
               How We Help
@@ -121,32 +150,46 @@ export default function Footer() {
 
             <ul className="space-y-3">
               <li>
-                <Link href={route("/revenue-snapshot")} className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href={route("/revenue-snapshot")}
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Revenue Snapshot™
                 </Link>
               </li>
 
               <li>
-                <Link href={route("/revenue-infrastructure-assessment")} className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href={route(
+                    "/revenue-infrastructure-assessment"
+                  )}
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Revenue Infrastructure Assessment™
                 </Link>
               </li>
 
               <li>
-                <Link href={route("/services")} className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href={route("/services")}
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Services & Capabilities
                 </Link>
               </li>
 
               <li>
-                <Link href={pricingRoute()} className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href={pricingRoute()}
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Pricing
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Industries */}
+          {/* INDUSTRIES */}
           <div>
             <h4 className="font-semibold mb-4 text-foreground text-sm tracking-wide">
               Industries
@@ -156,7 +199,9 @@ export default function Footer() {
               {INDUSTRIES.map((item) => (
                 <li key={item.slug}>
                   <Link
-                    href={route(`/industries/${item.slug}`)}
+                    href={route(
+                      `/industries/${item.slug}`
+                    )}
                     className="text-sm text-muted-foreground hover:text-primary"
                   >
                     {item.name}
@@ -175,7 +220,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* COMPANY */}
           <div>
             <h4 className="font-semibold mb-4 text-foreground text-sm tracking-wide">
               Company
@@ -183,7 +228,10 @@ export default function Footer() {
 
             <ul className="space-y-3">
               <li>
-                <Link href={route("/about")} className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href={route("/about")}
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   About
                 </Link>
               </li>
@@ -201,7 +249,9 @@ export default function Footer() {
 
               <li>
                 <Link
-                  href={route("/revenue-intelligence-faq")}
+                  href={route(
+                    "/revenue-intelligence-faq"
+                  )}
                   className="text-sm text-muted-foreground hover:text-primary"
                 >
                   Revenue FAQ
@@ -209,13 +259,19 @@ export default function Footer() {
               </li>
 
               <li>
-                <Link href={route("/blog")} className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href={route("/blog")}
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Blog
                 </Link>
               </li>
 
               <li>
-                <Link href={route("/contact")} className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href={route("/contact")}
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Contact
                 </Link>
               </li>
@@ -223,10 +279,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Contact information */}
+        {/* MARKET-SPECIFIC CONTACT INFORMATION */}
         <div className="border-t border-border/30 mt-10 pt-8 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-          {isRegional && config ? (
+          {config ? (
             <div>
               <p className="text-xs text-muted-foreground/60 uppercase tracking-widest font-semibold mb-2">
                 {config.label}
@@ -236,29 +292,31 @@ export default function Footer() {
                 {config.city}, {config.region}
               </p>
 
-              {config.phone && config.phoneHref && (
-                <p className="text-sm text-muted-foreground mt-1">
-                  <a
-                    href={config.phoneHref}
-                    className="text-foreground/80 hover:text-primary"
-                  >
-                    {config.phone}
-                  </a>
-                </p>
-              )}
+              {config.phone &&
+                config.phoneHref && (
+                  <p className="text-sm text-muted-foreground mt-1">
+                    <a
+                      href={config.phoneHref}
+                      className="text-foreground/80 hover:text-primary"
+                    >
+                      {config.phone}
+                    </a>
+                  </p>
+                )}
 
-              {config.whatsapp && config.whatsappHref && (
-                <p className="text-sm text-muted-foreground mt-1">
-                  <a
-                    href={config.whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground/80 hover:text-primary"
-                  >
-                    WhatsApp: {config.whatsapp}
-                  </a>
-                </p>
-              )}
+              {config.whatsapp &&
+                config.whatsappHref && (
+                  <p className="text-sm text-muted-foreground mt-1">
+                    <a
+                      href={config.whatsappHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-foreground/80 hover:text-primary"
+                    >
+                      WhatsApp: {config.whatsapp}
+                    </a>
+                  </p>
+                )}
 
               <p className="text-sm text-muted-foreground mt-1">
                 <a
@@ -271,6 +329,7 @@ export default function Footer() {
             </div>
           ) : (
             <>
+              {/* NO MARKET SELECTED: US */}
               <div>
                 <p className="text-xs text-muted-foreground/60 uppercase tracking-widest font-semibold mb-2">
                   United States
@@ -280,19 +339,28 @@ export default function Footer() {
                   {US.city}, {US.region}
                 </p>
 
-                <p className="text-sm mt-1">
-                  <a href={US.phoneHref} className="text-foreground/80 hover:text-primary">
-                    {US.phone}
-                  </a>
-                </p>
+                {US.phone && US.phoneHref && (
+                  <p className="text-sm mt-1">
+                    <a
+                      href={US.phoneHref}
+                      className="text-foreground/80 hover:text-primary"
+                    >
+                      {US.phone}
+                    </a>
+                  </p>
+                )}
 
                 <p className="text-sm mt-1">
-                  <a href={`mailto:${BRAND.email}`} className="text-foreground/80 hover:text-primary">
+                  <a
+                    href={`mailto:${BRAND.email}`}
+                    className="text-foreground/80 hover:text-primary"
+                  >
                     {BRAND.email}
                   </a>
                 </p>
               </div>
 
+              {/* NO MARKET SELECTED: JAMAICA */}
               <div>
                 <p className="text-xs text-muted-foreground/60 uppercase tracking-widest font-semibold mb-2">
                   Jamaica
@@ -302,27 +370,29 @@ export default function Footer() {
                   {JM.city}, {JM.region}
                 </p>
 
-                {JM.whatsapp && JM.whatsappHref && (
-                  <p className="text-sm mt-1">
-                    <a
-                      href={JM.whatsappHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground/80 hover:text-primary"
-                    >
-                      WhatsApp: {JM.whatsapp}
-                    </a>
-                  </p>
-                )}
+                {JM.whatsapp &&
+                  JM.whatsappHref && (
+                    <p className="text-sm mt-1">
+                      <a
+                        href={JM.whatsappHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground/80 hover:text-primary"
+                      >
+                        WhatsApp: {JM.whatsapp}
+                      </a>
+                    </p>
+                  )}
               </div>
             </>
           )}
         </div>
 
-        {/* Copyright and legal */}
+        {/* COPYRIGHT AND LEGAL */}
         <div className="border-t border-border/40 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>
-            © {new Date().getFullYear()} {copyright} All rights reserved.
+            © {new Date().getFullYear()}{" "}
+            {copyright}. All rights reserved.
           </p>
 
           <div className="flex gap-6">
@@ -344,4 +414,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+            }
