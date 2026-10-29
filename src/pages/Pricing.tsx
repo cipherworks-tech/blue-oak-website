@@ -167,11 +167,7 @@ export default function Pricing() {
                 y: -4,
                 transition: { duration: 0.2 },
               }}
-              className={`group rounded-2xl border p-8 md:p-10 flex flex-col transition-colors ${
-                index === 0
-                  ? "border-primary/35 bg-primary/[0.04] hover:border-primary/50 shadow-[0_0_40px_rgba(212,175,55,0.07)]"
-                  : "border-border/60 bg-card/30 hover:border-primary/30"
-              }`}
+           className="group rounded-2xl border border-border/60 bg-card/30 p-8 md:p-10 flex flex-col transition-colors hover:border-primary/40"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
@@ -205,17 +201,7 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-
-              <Button
-                asChild
-                size="lg"
-                variant={index === 0 ? "default" : "outline"}
-                className={`w-full font-semibold ${
-                  index === 0
-                    ? "shadow-[0_0_16px_rgba(212,175,55,0.2)] hover:shadow-[0_0_28px_rgba(212,175,55,0.4)]"
-                    : "border-border bg-transparent hover:bg-white/5"
-                }`}
-              >
+              <Button asChild size="lg" variant="outline" className="w-full h-auto min-h-11 py-3 font-semibold whitespace-normal text-center border-border bg-transparent hover:bg-white/5">
                 <Link
                   href={market.path}
                   onClick={() => setMarket(market.key)}
