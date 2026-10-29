@@ -57,7 +57,7 @@ export default function Pricing() {
         "Detroit Metro and nationwide service",
       ],
       path: usPricingPath,
-      button: "View United States Pricing",
+      button: "View Pricing",
     },
     {
       key: "JM" as const,
@@ -75,7 +75,7 @@ export default function Pricing() {
         `Community Impact offering from ${JM.pricing.communityImpact}/month`,
       ],
       path: jmPricingPath,
-      button: "View Jamaica Pricing",
+      button: "View Pricing",
     },
   ];
 
