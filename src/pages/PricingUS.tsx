@@ -337,7 +337,7 @@ export default function PricingUS() {
                       : ""
                   }`}
                 >
-                  <Link href={SNAPSHOT_PATH}>
+                  <Link href={pkg.name === "Community Impact" ? "/us/community-impact/apply" : SNAPSHOT_PATH}>
                     {pkg.cta}
                     <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
                   </Link>
