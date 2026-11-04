@@ -167,7 +167,7 @@ export default function Pricing() {
                 y: -4,
                 transition: { duration: 0.2 },
               }}
-           className="group rounded-2xl border border-border/60 bg-card/30 p-8 md:p-10 flex flex-col transition-colors hover:border-primary/40"
+              className="group rounded-2xl border border-border/60 bg-card/30 p-8 md:p-10 flex flex-col transition-colors hover:border-primary/40"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
