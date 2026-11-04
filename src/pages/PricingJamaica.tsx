@@ -271,8 +271,7 @@ export default function PricingJamaica() {
                   variant={pkg.featured ? "default" : "outline"}
                   className="w-full font-semibold"
                 >
-                  <Link href={SNAPSHOT}>
-                    {pkg.cta}
+                  <Link href={pkg.name === "Community Impact" ? "/jm/community-impact/apply" : SNAPSHOT}>       
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
                 </Button>
