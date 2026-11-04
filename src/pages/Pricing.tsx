@@ -159,7 +159,7 @@ export default function Pricing() {
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
         >
-          {marketCards.map((market, index) => (
+          {marketCards.map((market) => (
             <motion.div
               key={market.key}
               variants={fadeUp}
