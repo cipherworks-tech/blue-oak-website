@@ -24,6 +24,7 @@ import Home from "@/pages/Home";
 import Services from "@/pages/Services";
 import Pricing from "@/pages/Pricing";
 import PricingJamaica from "@/pages/PricingJamaica";
+import CommunityImpactApplication from "@/pages/CommunityImpactApplication";
 import PricingUS from "@/pages/PricingUS";
 import Testimonials from "@/pages/Testimonials";
 import Contact from "@/pages/Contact";
@@ -208,6 +209,11 @@ function Router() {
             component={Services}
           />
 
+          <Route
+            path="/jm/community-impact/apply"
+            component={CommunityImpactApplication}
+          />
+          
           <Route
             path="/jm/pricing"
             component={PricingJamaica}
